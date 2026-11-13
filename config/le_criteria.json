@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "title": "LE review criteria",
+  "source": {
+    "name": "EllyDTrades LE Model: Strategy Research & Bot Spec",
+    "version": "v5",
+    "as_of": "2026-11-11",
+    "note": "Checklist derived for this journal. Grade A was stated plainly. Grade B was stated in contradictory ways. Grade D was not published. B and D items have no numeric threshold and stay 'needs your confirmation'. This app does not trade and does not connect to a broker."
+  },
+  "grades": {
+    "A": "Stated plainly by him or the official indicator docs",
+    "B": "Stated, but sources contradict each other",
+    "D": "Not published. No number is stored for this item."
+  },
+  "personal_rules_policy": "His account-guide examples are reference only. Do not copy them into personal rules. Daily trade limits and daily loss limits stay blank until you set them.",
+  "gate_order": [
+    "VIX filter before a long",
+    "Level gate: 10-minute candle body beyond both levels",
+    "EMA gate: correct side of the 10-minute 8 EMA",
+    "Daily gate: daily chart agrees"
+  ],
+  "items": [
+    {
+      "id": "levels_pdh_pdl",
+      "group": "Levels",
+      "label": "PDH and PDL",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "PDH and PDL are the prior regular-session high and low. Prior-day levels outweigh pre-market levels.",
+      "check": "record_levels"
+    },
+    {
+      "id": "levels_pmh_pml",
+      "group": "Levels",
+      "label": "PMH and PML",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "PMH and PML are the pre-market high and low from 4:00 to 9:29 ET. Thin pre-market wicks are not real extremes; use where price is basing. No volume cutoff is published.",
+      "check": "record_levels"
+    },
+    {
+      "id": "entry_gate_body_both",
+      "group": "Gates",
+      "label": "Body beyond both levels",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "For a long, the 10-minute candle body must clear both PMH and PDH. For a short, both PML and PDL. A wick through a level is not a break.",
+      "check": "body_versus_levels"
+    },
+    {
+      "id": "levels_before_ema",
+      "group": "Gates",
+      "label": "Levels before the EMA",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "A level has to break before an 8 EMA entry is allowed. Do not buy the EMA if no level has broken.",
+      "check": "narrative_only"
+    },
+    {
+      "id": "ema_8_10m",
+      "group": "EMA",
+      "label": "10-minute 8 EMA",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "The traded moving average is the 8 EMA on the 10-minute chart, with smoothing off. Price should be above it for longs and below it for shorts.",
+      "check": "record_ema"
+    },
+    {
+      "id": "ema_near_level",
+      "group": "EMA",
+      "label": "8 EMA near the level",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "On a level retest, the 8 EMA should be near the level being retested. How near is the unpublished air-gap item, not a number in this file.",
+      "check": "distance_fact_only"
+    },
+    {
+      "id": "air_gap_tolerance",
+      "group": "Needs confirmation",
+      "label": "Air-gap tolerance",
+      "grade": "D",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "The buffer that decides a level retest versus an EMA entry is not published. It lives in the paid indicator. Nothing here fills that in.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "level_retest",
+      "group": "Entries",
+      "label": "Level retest",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "After the body clears a level, a level entry is a pullback that retests the level and holds.",
+      "check": "setup_manual"
+    },
+    {
+      "id": "ema_entry",
+      "group": "Entries",
+      "label": "8 EMA entry",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "An EMA entry marks the first candle that touches the 8 EMA, then enters when price breaks that candle's high (long) or low (short).",
+      "check": "setup_manual"
+    },
+    {
+      "id": "whichever_first",
+      "group": "Entries",
+      "label": "Whichever entry comes first",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "Take the level retest or the EMA entry, whichever arrives first.",
+      "check": "narrative_only"
+    },
+    {
+      "id": "vix_filter",
+      "group": "Filters",
+      "label": "VIX filter",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": 20,
+      "statement": "VIX above 20 blocks longs. This is a market filter, checked before the level gate. If VIX was not imported, the item is insufficient data.",
+      "check": "vix"
+    },
+    {
+      "id": "first_30_60",
+      "group": "Filters",
+      "label": "First 30 to 60 minutes",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "A level break that happens inside the first 30 to 60 minutes of the regular session and holds is the high-conviction version. Failing PMH in the first 30 minutes is chop or a gap fill. The journal records which window the fill was in. It does not invent a single minute cutoff.",
+      "check": "time_window"
+    },
+    {
+      "id": "gap_down_play",
+      "group": "Filters",
+      "label": "Gap-down play",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "On a gap down, if QQQ or SPY is still holding PML at 10:00 ET, the play is a long for a pop. If PML breaks, there is no trade.",
+      "check": "gap_down_flag"
+    },
+    {
+      "id": "gap_down_target",
+      "group": "Needs confirmation",
+      "label": "Gap-down target",
+      "grade": "B",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "Two examples exist and the formula was never written. Do not compute a target percent. Leave the target for you to confirm.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "timeframe_30m",
+      "group": "Timeframes",
+      "label": "30-minute chart",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "The 10-minute chart is the entry timeframe. The 30-minute chart is context and the exit timeframe. The 3-minute chart is for the open only.",
+      "check": "m30_present"
+    },
+    {
+      "id": "extension_limit_30m",
+      "group": "Needs confirmation",
+      "label": "30-minute extension limit",
+      "grade": "D",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "A numeric extension limit, if one exists, was not published. The 30-minute role above is the timeframe, not a distance.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "volume_momentum_threshold",
+      "group": "Needs confirmation",
+      "label": "Volume and momentum threshold",
+      "grade": "D",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "Relative volume is a scanner column. No cutoff number was published. Do not treat a bar as confirmed or fake from a guessed multiple.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "stop_entry_candle",
+      "group": "Stop and exit",
+      "label": "Stop at the entry-candle extreme",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "For options, the stop is the low of the entry candle for a long and the high for a short, acted on immediately, with no wait for a candle close. If no stop was imported, say so. Do not invent the price.",
+      "check": "stop_present"
+    },
+    {
+      "id": "entry_candle_which",
+      "group": "Needs confirmation",
+      "label": "Which candle is the entry candle",
+      "grade": "B",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "It is unresolved whether the stop candle is the touch candle or the break candle. The journal does not pick one.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "scale_at_hod",
+      "group": "Stop and exit",
+      "label": "Scale at the high or low of day",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "Take part off at the high of day for longs or the low of day for shorts, then trail the rest with the 8 EMA and cut when price breaks it. The fraction is the separate unconfirmed item.",
+      "check": "runner_fact"
+    },
+    {
+      "id": "scaling_fraction",
+      "group": "Needs confirmation",
+      "label": "Scaling fraction",
+      "grade": "B",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "Sources have said half, one third, two of three, and 75 percent. No single fraction is enforced.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "trail_8ema",
+      "group": "Stop and exit",
+      "label": "Trail the runner with the 8 EMA",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "After the first scale-out, move the stop to the 8 EMA and trail it. Cut the remainder when price breaks the 8 EMA.",
+      "check": "narrative_only"
+    },
+    {
+      "id": "reduce_risk_10et",
+      "group": "Stop and exit",
+      "label": "Reduce risk at 10:00 ET",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "Reduce risk at 10:00 ET. Flat before the close on same-day expiry.",
+      "check": "narrative_only"
+    },
+    {
+      "id": "strike_1_2_otm",
+      "group": "Contract",
+      "label": "1 to 2 strikes out of the money",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "The published strike guide is 1 to 2 strikes out of the money. The journal can compare a computed strike distance with that range. It does not invent a different distance.",
+      "check": "strike_distance",
+      "published_range": {"min_strikes_otm": 1, "max_strikes_otm": 2}
+    },
+    {
+      "id": "chop_between_levels",
+      "group": "Filters",
+      "label": "No trade between PML and PMH",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "No trade while price is between PML and PMH.",
+      "check": "price_versus_pm_levels"
+    },
+    {
+      "id": "outside_both_levels",
+      "group": "Filters",
+      "label": "Outside setup",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "Being beyond both levels is the stronger, A+ version of the setup.",
+      "check": "narrative_only"
+    },
+    {
+      "id": "inside_day",
+      "group": "Needs confirmation",
+      "label": "Inside day",
+      "grade": "B",
+      "needs_confirmation": true,
+      "numeric_threshold": null,
+      "statement": "The indicator still marks an inside setup. Later video says to avoid inside days. Leave this for you to confirm. Do not auto-fail it.",
+      "check": "needs_confirmation"
+    },
+    {
+      "id": "daily_bias",
+      "group": "Gates",
+      "label": "Daily chart agrees",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "The daily chart overrides the intraday chart. A bearish daily means no longs. The mechanical version he described uses the daily 8 EMA and daily 20 EMA.",
+      "check": "daily_bias_if_present"
+    },
+    {
+      "id": "indices_pdh_pdl_only",
+      "group": "Filters",
+      "label": "Index products use PDH and PDL only",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "For index products, use PDH and PDL only.",
+      "check": "narrative_only"
+    },
+    {
+      "id": "add_triggers",
+      "group": "Entries",
+      "label": "Adds",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "statement": "Adds named in his recaps: clearing the second level, reclaiming the 8 EMA, or a flag. He has described entering on a PMH retest and adding over PDH.",
+      "check": "add_count_fact"
+    },
+    {
+      "id": "his_size_examples",
+      "group": "Reference only",
+      "label": "His size and loss examples",
+      "grade": "A",
+      "needs_confirmation": false,
+      "numeric_threshold": null,
+      "apply_to_personal_rules": false,
+      "statement": "On a small-account guide he used about 20% of the account as a max position, about 6% as a max daily loss, and a three-trade cap with two reds ending the day. Those are his examples. They are not your settings and the journal will not prefill them.",
+      "check": "do_not_enforce"
+    }
+  ]
+}

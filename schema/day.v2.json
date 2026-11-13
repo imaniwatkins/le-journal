@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imaniwatkins.github.io/le-journal/schema/day.v2.json",
+  "title": "Webull Trading Journal day",
+  "type": "object",
+  "required": ["schema_version", "date", "session_timezone", "executions"],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "date": { "type": "string", "description": "New York session date, YYYY-MM-DD." },
+    "session_timezone": { "const": "America/New_York" },
+    "account_label": { "type": "string" },
+    "broker_day_pnl": { "type": ["number", "null"] },
+    "broker_day_pnl_source": { "type": ["string", "null"] },
+    "fees_from_api": { "type": ["number", "null"] },
+    "balance_close": { "type": ["number", "null"] },
+    "starting_cash": { "type": ["number", "null"] },
+    "tickers": { "type": "array", "items": { "type": "string" } },
+    "vix": { "type": ["number", "null"], "description": "Omit or null when it was not pulled. Do not guess." },
+    "gap_down": { "type": ["boolean", "null"] },
+    "stop_orders_in_history": { "type": ["integer", "null"] },
+    "executions": {
+      "type": "array",
+      "description": "Raw fills. execution_id must be stable so a re-import does not duplicate them.",
+      "items": {
+        "type": "object",
+        "required": ["execution_id", "time_utc", "side", "qty", "price"],
+        "properties": {
+          "execution_id": { "type": "string" },
+          "order_id": { "type": "string" },
+          "time_utc": { "type": "string" },
+          "side": { "enum": ["buy", "sell"] },
+          "position_effect": { "enum": ["open", "close"] },
+          "qty": { "type": "number", "exclusiveMinimum": 0 },
+          "price": { "type": "number" },
+          "fees": { "type": ["number", "null"] },
+          "realized_pnl": { "type": ["number", "null"], "description": "Broker realized P&L for this fill, or null." },
+          "multiplier": { "type": "number" },
+          "underlying": { "type": "string" },
+          "asset_type": { "enum": ["option", "stock"] },
+          "occ_symbol": { "type": ["string", "null"] },
+          "option_type": { "type": ["string", "null"] },
+          "strike": { "type": ["number", "null"] },
+          "expiry": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "bot_journal": {
+      "type": "object",
+      "description": "Imported narrative. The app does not treat it as the user's confirmed review."
+    },
+    "charts": {
+      "type": "object",
+      "properties": {
+        "underlying": { "type": "object" },
+        "option_5m": { "type": "object" }
+      }
+    }
+  },
+  "unevaluatedProperties": true
+}

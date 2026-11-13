@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "kind": "journal-edits",
+  "updated_at": null,
+  "days": {},
+  "plans": [],
+  "weekly_reviews": {},
+  "personal_rules": {
+    "daily_trade_limit": null,
+    "daily_loss_limit": null,
+    "custom_rules": []
+  }
+}
