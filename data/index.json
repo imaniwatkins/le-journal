@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "title": "Webull Trading Journal",
+  "account_label": "Paper Individual Cash",
+  "session_timezone": "America/New_York",
+  "generated_at": "2026-11-13T00:16:40Z",
+  "as_of": "2026-11-12",
+  "first_journal_date": "2026-11-12",
+  "no_fills_before": "2026-11-12",
+  "last_successful_sync": "2026-11-12T21:00:00Z",
+  "warnings": [],
+  "days": [
+    {
+      "date": "2026-11-12",
+      "file": "days/2026-11-12.json",
+      "sync_status": "synced",
+      "sync_message": null,
+      "tile_pnl": 63.68,
+      "tile_pnl_source": "broker_day",
+      "broker_day_pnl": 63.68,
+      "broker_day_pnl_source": "Account day P&L from get_account_balance (fees not itemized on the orders).",
+      "fifo_realized_pnl": 64.0,
+      "fees_known": false,
+      "completed_trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "breakeven": 0,
+      "open_positions": 0,
+      "tickers": [
+        "AMD"
+      ],
+      "balance_close": 1063.68,
+      "starting_cash": 1000.0,
+      "bot_grade": "Mixed"
+    }
+  ]
+}

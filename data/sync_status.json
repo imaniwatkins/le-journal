@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "last_successful_sync": "2026-11-12T21:00:00Z",
+  "note": "The site only stores files the assistant has already committed. Refresh reloads those files. It does not start a broker import.",
+  "days": {
+    "2026-11-12": {
+      "status": "synced",
+      "message": null
+    }
+  }
+}

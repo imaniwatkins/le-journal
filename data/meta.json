@@ -1,0 +1,8 @@
+{
+  "title": "Webull Trading Journal",
+  "account_label": "Paper Individual Cash",
+  "session_timezone": "America/New_York",
+  "first_journal_date": "2026-11-12",
+  "no_fills_before": "2026-11-12",
+  "no_fills_before_note": "The imported paper history had no fills before this New York session."
+}

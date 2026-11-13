@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "session_timezone": "America/New_York",
+  "generated_at": "2026-11-13T00:16:40Z",
+  "execution_count": 3,
+  "duplicate_executions_dropped": 0,
+  "trades": [
+    {
+      "trade_id": "tr_6af615ecf395f0000019c73a",
+      "instrument_key": "AMD261113C00622500",
+      "underlying": "AMD",
+      "asset_type": "option",
+      "occ_symbol": "AMD261113C00622500",
+      "option_type": "CALL",
+      "strike": 622.5,
+      "expiry": "2026-11-13",
+      "contract": "AMD 2026-11-13 622.50C",
+      "direction": "long",
+      "multiplier": 100.0,
+      "opened_at": "2026-11-12T19:40:23.713Z",
+      "closed_at": "2026-11-12T20:00:32.572Z",
+      "session_open": "2026-11-12",
+      "session_close": "2026-11-12",
+      "qty_opened": 3.0,
+      "qty_closed": 3.0,
+      "qty_open": 0.0,
+      "avg_entry": 1.35,
+      "avg_exit": 1.563333,
+      "fees": null,
+      "fees_known": false,
+      "fees_treatment": "unknown",
+      "gross_pnl": 64.0,
+      "realized_pnl": 64.0,
+      "pnl_source": "fifo",
+      "pnl_pct": 15.8025,
+      "status": "closed",
+      "outcome": "win",
+      "duration_seconds": 1209,
+      "legs": [
+        {
+          "execution_id": "6af615ecf395f0000019c73a",
+          "order_id": "6af615ecf395f0000019c73a",
+          "time_utc": "2026-11-12T19:40:23.713Z",
+          "session_date": "2026-11-12",
+          "side": "buy",
+          "effect": "open",
+          "qty": 3.0,
+          "price": 1.35,
+          "fees": null,
+          "realized_pnl": null,
+          "pnl_source": null
+        },
+        {
+          "execution_id": "6af6174f0b5d8e0000560b0f",
+          "order_id": "6af6174f0b5d8e0000560b0f",
+          "time_utc": "2026-11-12T19:45:55.198Z",
+          "session_date": "2026-11-12",
+          "side": "sell",
+          "effect": "partial_exit",
+          "qty": 1.0,
+          "price": 1.57,
+          "fees": null,
+          "realized_pnl": 22.0,
+          "pnl_source": "fifo"
+        },
+        {
+          "execution_id": "6af61adc74971f000049476c",
+          "order_id": "6af61adc74971f000049476c",
+          "time_utc": "2026-11-12T20:00:32.572Z",
+          "session_date": "2026-11-12",
+          "side": "sell",
+          "effect": "close",
+          "qty": 2.0,
+          "price": 1.56,
+          "fees": null,
+          "realized_pnl": 42.0,
+          "pnl_source": "fifo"
+        }
+      ],
+      "execution_ids": [
+        "6af615ecf395f0000019c73a",
+        "6af6174f0b5d8e0000560b0f",
+        "6af61adc74971f000049476c"
+      ],
+      "add_count": 0,
+      "partial_exit_count": 1
+    }
+  ],
+  "open_positions": []
+}
